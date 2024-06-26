@@ -1,0 +1,143 @@
+{
+  "$schema": "https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/schema.json",
+  "blocks": [
+    {
+      "alignment": "left",
+      "segments": [
+        {
+          "background": "#E5E9F0",
+          "foreground": "#4C566A",
+          "leading_diamond": "╭─",
+          "style": "diamond",
+          "template": "{{ if .SSHSession }} {{ end }}{{ .UserName }}@{{ .HostName }} ",
+          "type": "session"
+        },
+        {
+          "background": "#81A1C1",
+          "foreground": "#2E3440",
+          "powerline_symbol": "",
+          "properties": {
+            "style": "folder"
+          },
+          "style": "powerline",
+          "template": "  </>{{ .Path }} ",
+          "type": "path"
+        },
+        {
+          "background": "#A3BE8C",
+          "background_templates": [
+            "{{ if or (.Working.Changed) (.Staging.Changed) }}#D08770{{ end }}",
+            "{{ if and (gt .Ahead 0) (gt .Behind 0) }}#EBCB8B{{ end }}",
+            "{{ if gt .Ahead 0 }}#B48EAD{{ end }}",
+            "{{ if gt .Behind 0 }}#B48EAD{{ end }}"
+          ],
+          "foreground": "#2E3440",
+          "powerline_symbol": "",
+          "properties": {
+            "fetch_stash_count": true,
+            "fetch_status": true,
+            "fetch_upstream_icon": true
+          },
+          "style": "powerline",
+          "template": " {{ .UpstreamIcon }}{{ .HEAD }}{{if .BranchStatus }} {{ .BranchStatus }}{{ end }}{{ if .Working.Changed }}  {{ .Working.String }}{{ end }}{{ if and (.Working.Changed) (.Staging.Changed) }} |{{ end }}{{ if .Staging.Changed }}  {{ .Staging.String }}{{ end }}{{ if gt .StashCount 0 }}  {{ .StashCount }}{{ end }} ",
+          "type": "git"
+        },
+        {
+          "background": "#B48EAD",
+          "foreground": "#2E3440",
+          "powerline_symbol": "",
+          "properties": {
+            "always_enabled": true
+          },
+          "style": "powerline",
+          "template": "  {{ .FormattedMs }} ",
+          "type": "executiontime"
+        },
+        {
+          "background": "#EBCB8B",
+          "background_templates": [
+            "{{ if gt .Code 0 }}#f1184c{{ end }}"
+          ],
+          "foreground": "#2E3440",
+          "leading_diamond": "<transparent,background></>",
+          "properties": {
+            "always_enabled": true
+          },
+          "style": "diamond",
+          "template": " ⚡ {{ if gt .Code 0 }} {{ reason .Code }}{{ else }}{{ end }}",
+          "trailing_diamond": "",
+          "type": "status"
+        }
+      ],
+      "type": "prompt"
+    },
+    {
+      "alignment": "right",
+      "segments": [
+        {
+          "background": "#D08770",
+          "foreground": "#2E3440",
+          "style": "plain",
+          "template": "<#D08770,transparent></>  {{ .Name }} <transparent,#D08770></>",
+          "type": "shell"
+        },
+        {
+          "background": "#A3BE8C",
+          "background_templates": [
+            "{{if eq \"Charging\" .State.String}}#A3BE8C{{end}}",
+            "{{if eq \"Discharging\" .State.String}}#A3BE8C{{end}}",
+            "{{if eq \"Full\" .State.String}}#A3BE8C{{end}}"
+          ],
+          "foreground": "#242424",
+          "invert_powerline": true,
+          "powerline_symbol": "",
+          "style": "powerline",
+          "template": " {{ if not .Error }}{{ .Icon }}{{ .Percentage }}{{ end }}{{ .Error }}  ",
+          "type": "battery"
+        },
+        {
+          "background": "#81A1C1",
+          "foreground": "#2E3440",
+          "invert_powerline": true,
+          "leading_diamond": "",
+          "style": "diamond",
+          "template": "  {{ .CurrentDate | date .Format }} ",
+          "trailing_diamond": "",
+          "type": "time"
+        }
+      ],
+      "type": "prompt"
+    },
+    {
+      "alignment": "right",
+      "segments": [],
+      "type": "prompt"
+    },
+    {
+      "alignment": "left",
+      "newline": true,
+      "segments": [
+        {
+          "foreground": "#ECEFF4",
+          "style": "plain",
+          "template": "╰─",
+          "type": "text"
+        },
+        {
+          "foreground": "#8FBCBB",
+          "foreground_templates": [
+            "{{ if gt .Code 0 }}#ef5350{{ end }}"
+          ],
+          "properties": {
+            "always_enabled": true
+          },
+          "style": "plain",
+          "template": "<#B48EAD>❯</><#A3BE8C>❯</><#EBCB8B>❯</> ",
+          "type": "status"
+        }
+      ],
+      "type": "prompt"
+    }
+  ],
+  "version": 2
+}
